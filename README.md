@@ -17,14 +17,15 @@ python.exe -m pip install --upgrade git+https://github.com/ksugahar/Coreform_Cub
 
 ---
 # 使い方
-Cubitのメッシュ生成 Pythonスクリプトの最後に
+Cubitのメッシュ生成後に、
+play "Pythonスクリプト名.py" 
+を実行する。
+"Pythonスクリプト名.py" の中身は例えば、
 ```
 FileName = 'O:/test.nas'
 import cubit_mesh_export
 cubit_mesh_export.export_3D_Nastran(cubit, FileName)
 ```
-を追記するだけ。
-
 ---
 # 関数一覧
 - export_3D_gmsh_ver2
