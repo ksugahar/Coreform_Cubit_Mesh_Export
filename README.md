@@ -17,7 +17,7 @@ python.exe -m pip install --upgrade git+https://github.com/ksugahar/Coreform_Cub
 
 ---
 # 使い方
-Cubitのメッシュ生成後に、
+Cubitでメッシュ生成後にpythonを実行するコマンドを入力。
 play "Pythonスクリプト名.py" 
 を実行する。
 "Pythonスクリプト名.py" の中身は例えば、
