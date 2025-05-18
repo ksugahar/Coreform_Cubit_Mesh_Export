@@ -1,7 +1,8 @@
 # インストール方法
 Windowsであれば，[Windows版のGIT](https://gitforwindows.org/) をインストールします。
 ```
-pip install git+https://github.com/ksugahar/Coreform_Cubit_Python_API.git
+cd ""C:\Program Files\Coreform Cubit 2025.3\bin\python3\"
+python.exe -m pip install --upgrade git+https://github.com/ksugahar/Coreform_Cubit_Python_API.git
 ```
 ----
 # サポートしているファイル
