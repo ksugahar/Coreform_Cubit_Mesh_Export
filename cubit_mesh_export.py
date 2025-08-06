@@ -82,6 +82,99 @@ def export_3D_mesh(cubit, FileName):
 ###	Gmsh format version 2
 ########################################################################
 
+def export_2D_gmsh_ver2(cubit, FileName):
+
+	with open(FileName, 'w') as fid:
+
+		fid.write("$MeshFormat\n")
+		fid.write("2.2 0 8\n")
+		fid.write("$EndMeshFormat\n")
+
+		fid.write("$PhysicalNames\n")
+		fid.write(f'{cubit.get_nodeset_count() + cubit.get_block_count()}\n')
+
+		for nodeset_id in cubit.get_nodeset_id_list():
+			name = cubit.get_exodus_entity_name("nodeset",nodeset_id)
+			fid.write(f'1 {nodeset_id} "{name}"\n')
+
+		for block_id in cubit.get_block_id_list():
+			name = cubit.get_exodus_entity_name("block",block_id)
+			fid.write(f'2 {block_id} "{name}"\n')
+		fid.write('$EndPhysicalNames\n')
+
+		fid.write("$Nodes\n")
+
+		node_set = set()
+		for block_id in cubit.get_block_id_list():
+			surface_list = cubit.get_block_surfaces(block_id)
+			node_set.update(cubit.parse_cubit_list( 'node', f'in surface {" ".join(map(str, surface_list)) }' ))
+		fid.write(f'{len(node_set)}\n')
+		for node_id in node_set:
+			coord = cubit.get_nodal_coordinates(node_id)
+			fid.write(f'{node_id} {coord[0]} {coord[1]} {coord[2]}\n')
+		fid.write('$EndNodes\n')
+
+		edge_list = []
+		quad_list = []
+		tri_list = []
+
+		for nodeset_id in cubit.get_nodeset_id_list():
+			curve_list = cubit.get_nodeset_curves(nodeset_id)
+			for curve_id in curve_list:
+				edge_list += cubit.get_curve_edges(curve_id)
+
+		for block_id in cubit.get_block_id_list():
+			surface_list = cubit.get_block_surfaces(block_id)
+			for surface_id in surface_list:
+				quad_list += cubit.get_surface_quads(surface_id)
+				tri_list += cubit.get_surface_tris(surface_id)
+
+		Elems = 0
+		fid.write('$Elements\n')
+		fid.write(f'{len(edge_list) + len(quad_list) + len(tri_list)}\n')
+
+		for nodeset_id in cubit.get_nodeset_id_list():
+			curve_list = cubit.get_nodeset_curves(nodeset_id)
+			for curve_id in curve_list:
+				edge_list = cubit.get_curve_edges(curve_id)
+				if len(edge_list)>0:
+					for edge_id in edge_list:
+						Elems += 1
+						node_list = cubit.get_connectivity('edge', edge_id)
+						fid.write(f'{Elems} {1} {2} {nodeset_id} {curve_id} {node_list[0]} {node_list[1]}\n')
+
+		for block_id in cubit.get_block_id_list():
+			surface_list = cubit.get_block_surfaces(block_id)
+			for surface_id in surface_list:
+				quad_list = cubit.get_surface_quads(surface_id)
+				if len(quad_list)>0:
+					for quad_id in quad_list:
+						Elems += 1
+						node_list = cubit.get_expanded_connectivity("quad", quad_id)
+						if len(node_list)==4:
+							fid.write(f'{Elems} {3} {2} {block_id} {surface_id} {node_list[0]} {node_list[1]} {node_list[2]} {node_list[3]}\n')
+						if len(node_list)==8:
+							fid.write(f'{Elems} {16} {2} {block_id} {surface_id} {node_list[0]} {node_list[1]} {node_list[2]} {node_list[3]} {node_list[4]} {node_list[5]} {node_list[6]} {node_list[7]}\n')
+
+				tri_list = cubit.get_surface_tris(surface_id)
+				if len(tri_list)>0:
+					for tri_id in tri_list:
+						Elems += 1
+						node_list = cubit.get_expanded_connectivity("tri", tri_id)
+						if len(node_list)==3:
+							fid.write(f'{Elems} {2} {2} {block_id} {surface_id} {node_list[0]} {node_list[1]} {node_list[2]}\n')
+						if len(node_list)==6:
+							fid.write(f'{Elems} {9} {2} {block_id} {surface_id} {node_list[0]} {node_list[1]} {node_list[2]} {node_list[3]} {node_list[4]} {node_list[5]}\n')
+
+		fid.write('$EndElements\n')
+
+		fid.close()
+	return cubit
+
+########################################################################
+###	Gmsh format version 2
+########################################################################
+
 def export_3D_gmsh_ver2(cubit, FileName):
 
 	with open(FileName, 'w') as fid:
