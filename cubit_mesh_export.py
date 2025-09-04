@@ -235,16 +235,6 @@ def export_3D_gmsh_ver2(cubit, FileName):
 		for nodeset_id in cubit.get_nodeset_id_list():
 			surface_list = cubit.get_nodeset_surfaces(nodeset_id)
 			for surface_id in surface_list:
-				quad_list = cubit.get_surface_quads(surface_id)
-				if len(quad_list)>0:
-					for quad_id in quad_list:
-						Elems += 1
-						node_list = cubit.get_expanded_connectivity("quad", quad_id)
-						if len(node_list)==4:
-							fid.write(f'{Elems} {3} {2} {nodeset_id} {surface_id} {node_list[0]} {node_list[1]} {node_list[2]} {node_list[3]}\n')
-						if len(node_list)==8:
-							fid.write(f'{Elems} {16} {2} {nodeset_id} {surface_id} {node_list[0]} {node_list[1]} {node_list[2]} {node_list[3]} {node_list[4]} {node_list[5]} {node_list[6]} {node_list[7]}\n')
-
 				tri_list = cubit.get_surface_tris(surface_id)
 				if len(tri_list)>0:
 					for tri_id in tri_list:
@@ -255,21 +245,22 @@ def export_3D_gmsh_ver2(cubit, FileName):
 						if len(node_list)==6:
 							fid.write(f'{Elems} {9} {2} {nodeset_id} {surface_id} {node_list[0]} {node_list[1]} {node_list[2]} {node_list[3]} {node_list[4]} {node_list[5]}\n')
 
+				quad_list = cubit.get_surface_quads(surface_id)
+				if len(quad_list)>0:
+					for quad_id in quad_list:
+						Elems += 1
+						node_list = cubit.get_expanded_connectivity("quad", quad_id)
+						if len(node_list)==4:
+							fid.write(f'{Elems} {3} {2} {nodeset_id} {surface_id} {node_list[0]} {node_list[1]} {node_list[2]} {node_list[3]}\n')
+						if len(node_list)==8:
+							fid.write(f'{Elems} {16} {2} {nodeset_id} {surface_id} {node_list[0]} {node_list[1]} {node_list[2]} {node_list[3]} {node_list[4]} {node_list[5]} {node_list[6]} {node_list[7]}\n')
+						if len(node_list)==9:
+							fid.write(f'{Elems} {10} {2} {nodeset_id} {surface_id} {node_list[0]} {node_list[1]} {node_list[2]} {node_list[3]} {node_list[4]} {node_list[5]} {node_list[6]} {node_list[7]} {node_list[8]}\n')
+
+
 		for block_id in cubit.get_block_id_list():
 			volume_list = cubit.get_block_volumes(block_id)
 			for volume_id in volume_list:
-
-				hex_list = cubit.get_volume_hexes(volume_id)
-				if len(hex_list)>0:
-					for hex_id in hex_list:
-						Elems += 1
-						node_list = cubit.get_expanded_connectivity("hex", hex_id)
-						if len(node_list)==8:
-							fid.write(f'{Elems} {5} {2} {block_id} {volume_id} {node_list[0]} {node_list[1]} {node_list[2]} {node_list[3]} {node_list[4]} {node_list[5]} {node_list[6]} {node_list[7]}\n')
-						if len(node_list)==20:
-							fid.write(f'{Elems} {17} {2} {block_id} {volume_id} {node_list[0]} {node_list[1]} {node_list[2]} {node_list[3]} {node_list[4]} {node_list[5]} {node_list[6]} {node_list[7]} {node_list[8]} {node_list[11]} {node_list[12]} {node_list[9]} {node_list[13]} {node_list[10]} {node_list[14]} {node_list[15]} {node_list[16]} {node_list[19]} {node_list[17]} {node_list[18]}\n')
-						if len(node_list)==27:
-							fid.write(f'{Elems} {17} {2} {block_id} {volume_id} {node_list[0]} {node_list[1]} {node_list[2]} {node_list[3]} {node_list[4]} {node_list[5]} {node_list[6]} {node_list[7]} {node_list[8]} {node_list[11]} {node_list[10]} {node_list[9]} {node_list[12]} {node_list[10]} {node_list[14]} {node_list[15]} {node_list[16]} {node_list[17]} {node_list[18]} {node_list[19]} {node_list[20]} {node_list[21]} {node_list[22]} {node_list[23]} {node_list[24]} {node_list[25]} {node_list[26]}\n')
 
 				tet_list = cubit.get_volume_tets(volume_id)
 				if len(tet_list)>0:
@@ -279,21 +270,37 @@ def export_3D_gmsh_ver2(cubit, FileName):
 						if len(node_list)==4:
 							fid.write(f'{Elems} {4} {2} {block_id} {volume_id} {node_list[0]} {node_list[1]} {node_list[2]} {node_list[3]}\n')
 						if len(node_list)==10:
-							fid.write(f'{Elems} {11} {2} {block_id} {volume_id} {node_list[0]} {node_list[1]} {node_list[2]} {node_list[3]} {node_list[4]} {node_list[5]} {node_list[6]} {node_list[7]} {node_list[9]} {node_list[8]}\n')
+							fid.write(f'{Elems} {11} {2} {block_id} {volume_id} {node_list[0]} {node_list[1]} {node_list[2]} {node_list[3]} {node_list[4]} {node_list[5]} {node_list[6]} {node_list[7]} {node_list[8]} {node_list[9]}\n')
+
+				hex_list = cubit.get_volume_hexes(volume_id)
+				if len(hex_list)>0:
+					for hex_id in hex_list:
+						Elems += 1
+						node_list = cubit.get_expanded_connectivity("hex", hex_id)
+						if len(node_list)==8:
+							fid.write(f'{Elems} {5} {2} {block_id} {volume_id} {node_list[0]} {node_list[1]} {node_list[2]} {node_list[3]} {node_list[4]} {node_list[5]} {node_list[6]} {node_list[7]}\n')
+						if len(node_list)==20:
+							fid.write(f'{Elems} {17} {2} {block_id} {volume_id} {node_list[0]} {node_list[1]} {node_list[2]} {node_list[3]} {node_list[4]} {node_list[5]} {node_list[6]} {node_list[7]} {node_list[8]} {node_list[9]} {node_list[10]} {node_list[11]} {node_list[12]} {node_list[13]} {node_list[14]} {node_list[15]} {node_list[16]} {node_list[17]} {node_list[18]} {node_list[19]}\n')
 
 				wedge_list = cubit.get_volume_wedges(volume_id)
 				if len(wedge_list)>0:
 					for wedge_id in wedge_list:
 						Elems += 1
 						node_list = cubit.get_connectivity("wedge", wedge_id)
-						fid.write(f'{Elems} {6} {2} {block_id} {volume_id} {node_list[0]} {node_list[1]} {node_list[2]} {node_list[3]} {node_list[4]} {node_list[5]}\n')
+						if len(node_list)==6:
+							fid.write(f'{Elems} {6} {2} {block_id} {volume_id} {node_list[0]} {node_list[1]} {node_list[2]} {node_list[3]} {node_list[4]} {node_list[5]}\n')
+						if len(node_list)==15:
+							fid.write(f'{Elems} {15} {2} {block_id} {volume_id} {node_list[0]} {node_list[1]} {node_list[2]} {node_list[3]} {node_list[4]} {node_list[5]} {node_list[6]} {node_list[7]} {node_list[8]} {node_list[9]} {node_list[10]} {node_list[11]} {node_list[12]} {node_list[13]} {node_list[14]}\n')
 
 				pyramid_list = cubit.get_volume_pyramids(volume_id)
 				if len(pyramid_list)>0:
 					for pyramid_id in pyramid_list:
 						Elems += 1
 						node_list = cubit.get_connectivity("pyramid", pyramid_id)
-						fid.write(f'{Elems} {7} {2} {block_id} {volume_id} {node_list[0]} {node_list[1]} {node_list[2]} {node_list[3]} {node_list[4]}\n')
+						if len(node_list)==6:
+							fid.write(f'{Elems} {7} {2} {block_id} {volume_id} {node_list[0]} {node_list[1]} {node_list[2]} {node_list[3]} {node_list[4]}\n')
+						if len(node_list)==13:
+							fid.write(f'{Elems} {19} {2} {block_id} {volume_id} {node_list[0]} {node_list[1]} {node_list[2]} {node_list[3]} {node_list[4]} {node_list[5]} {node_list[6]} {node_list[7]} {node_list[8]} {node_list[9]} {node_list[10]} {node_list[11]} {node_list[12]} {node_list[13]} {node_list[14]}\n')
 
 		fid.write('$EndElements\n')
 
