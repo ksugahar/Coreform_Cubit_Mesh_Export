@@ -146,16 +146,6 @@ def export_2D_gmsh_ver2(cubit, FileName):
 		for block_id in cubit.get_block_id_list():
 			surface_list = cubit.get_block_surfaces(block_id)
 			for surface_id in surface_list:
-				quad_list = cubit.get_surface_quads(surface_id)
-				if len(quad_list)>0:
-					for quad_id in quad_list:
-						Elems += 1
-						node_list = cubit.get_expanded_connectivity("quad", quad_id)
-						if len(node_list)==4:
-							fid.write(f'{Elems} {3} {2} {block_id} {surface_id} {node_list[0]} {node_list[1]} {node_list[2]} {node_list[3]}\n')
-						if len(node_list)==8:
-							fid.write(f'{Elems} {16} {2} {block_id} {surface_id} {node_list[0]} {node_list[1]} {node_list[2]} {node_list[3]} {node_list[4]} {node_list[5]} {node_list[6]} {node_list[7]}\n')
-
 				tri_list = cubit.get_surface_tris(surface_id)
 				if len(tri_list)>0:
 					for tri_id in tri_list:
@@ -165,6 +155,20 @@ def export_2D_gmsh_ver2(cubit, FileName):
 							fid.write(f'{Elems} {2} {2} {block_id} {surface_id} {node_list[0]} {node_list[1]} {node_list[2]}\n')
 						if len(node_list)==6:
 							fid.write(f'{Elems} {9} {2} {block_id} {surface_id} {node_list[0]} {node_list[1]} {node_list[2]} {node_list[3]} {node_list[4]} {node_list[5]}\n')
+						if len(node_list)==7:
+							fid.write(f'{Elems} {42} {2} {block_id} {surface_id} {node_list[0]} {node_list[1]} {node_list[2]} {node_list[3]} {node_list[4]} {node_list[5]} {node_list[5]}\n')
+
+				quad_list = cubit.get_surface_quads(surface_id)
+				if len(quad_list)>0:
+					for quad_id in quad_list:
+						Elems += 1
+						node_list = cubit.get_expanded_connectivity("quad", quad_id)
+						if len(node_list)==4:
+							fid.write(f'{Elems} {3} {2} {block_id} {surface_id} {node_list[0]} {node_list[1]} {node_list[2]} {node_list[3]}\n')
+						if len(node_list)==8:
+							fid.write(f'{Elems} {16} {2} {block_id} {surface_id} {node_list[0]} {node_list[1]} {node_list[2]} {node_list[3]} {node_list[4]} {node_list[5]} {node_list[6]} {node_list[7]}\n')
+						if len(node_list)==9:
+							fid.write(f'{Elems} {10} {2} {block_id} {surface_id} {node_list[0]} {node_list[1]} {node_list[2]} {node_list[3]} {node_list[4]} {node_list[5]} {node_list[6]} {node_list[7]} {node_list[8]}\n')
 
 		fid.write('$EndElements\n')
 
