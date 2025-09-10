@@ -1,8 +1,15 @@
 # インストール方法
+
+## 方法1: PyPIから直接インストール（推奨）
+```
+pip install --upgrade Coreform_Cubit_Export_Mesh
+```
+
+## 方法2: GitHubから直接インストール
 Windowsであれば，[Windows版のGIT](https://gitforwindows.org/) をインストールします。
 ```
 cd ""C:\Program Files\Coreform Cubit 2025.3\bin\python3\"
-python.exe -m pip install --upgrade git+https://github.com/ksugahar/Coreform_Cubit_Python_API.git
+python.exe -m pip install --upgrade git+https://github.com/ksugahar/Coreform_Cubit_Export_Mesh.git
 ```
 ----
 # サポートしているファイル
@@ -12,7 +19,6 @@ python.exe -m pip install --upgrade git+https://github.com/ksugahar/Coreform_Cub
 - Nastranファイル (3D)
 - ELF用ファイル (2D)
 - ELF用ファイル (3D)
-- NGSolve用volファイル (3D)
 - vtkファイル (メッシュのみ)
 
 ---
@@ -34,5 +40,4 @@ cubit_mesh_export.export_3D_Nastran(cubit, FileName)
 - export_3D_Nastran
 - export_2D_meg
 - export_3D_meg
-- export_3D_ngsolve
 - export_3D_vtk

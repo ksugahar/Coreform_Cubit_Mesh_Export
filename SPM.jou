@@ -1,0 +1,102 @@
+Reset
+create surface circle radius 34 zplane 
+create surface circle radius 41 zplane 
+create surface rectangle width 10 height 20 zplane 
+create surface circle radius 20.35 zplane 
+move Surface 3 y 24 include_merged 
+
+subtract surface 1 from surface 2
+subtract surface 4 from surface 3 keep_tool 
+
+unite surface 5 6
+compress
+
+webcut body 1 with plane xplane rotate 150 about z
+webcut body 1 with plane xplane rotate 210 about z 
+delete Surface 4 5
+create surface rectangle width 5 height 11 zplane
+move Surface 7 x 7.5 y 26.5 include_merged
+Surface 7 copy reflect x
+compress
+Imprint all
+Merge all
+
+rotate Surface 2 to 4 angle -60 about Z include_merged
+Surface 2 to 4 copy rotate 60 about z repeat 2 
+
+create surface circle radius 19.85 zplane 
+create surface circle radius 16.85 zplane 
+create surface circle radius  6.00 zplane
+subtract surface 11 from surface 1 keep_tool 
+subtract surface 12 from surface 11 keep_tool 
+subtract surface 13 from surface 12 keep_tool
+ 
+webcut Surface 15  with plane xplane
+create surface circle radius 49.2 zplane
+compress
+
+webcut surface 10 to 15 with plane yplane
+delete surface 16 18 20 22 24 26
+compress
+subtract surface 1 to 14 from surface 15 keep_tool 
+split Body 15
+compress
+Imprint all
+Merge all
+
+surface all scheme trimesh
+surface 11 size auto factor 3
+mesh surface 11
+
+surface 1 4 7 size auto factor 6
+mesh surface 1 4 7
+Surface 2 3 5 6 8 9 size auto factor 7
+Mesh Surface 2 3 5 6 8 9
+
+Surface 12 13 14 15 16 17 18 19 size auto factor 5
+mesh surface 12 13 14 15 16 17 18 19
+surface 10 size auto factor 7
+mesh surface 10
+
+block 1 add surface 10 15 16 17 18 19
+block 1 name "Air"
+
+block 2 add surface 1 4 7 
+block 2 name "Stator"
+
+block 3 add surface 12 
+block 3 name "Rotor"
+
+block 4 add surface 2 
+block 4 name "Coil_V_out"
+
+block 5 add surface 3 
+block 5 name "Coil_V_in"
+
+block 6 add surface 5 
+block 6 name "Coil_U_out"
+
+block 7 add surface 6 
+block 7 name "Coil_U_in"
+
+block 8 add surface 8 
+block 8 name "Coil_W_out"
+
+block 9 add surface 9 
+block 9 name "Coil_W_in"
+
+block 10 add surface 13 
+block 10 name "magnet1"
+
+block 11 add surface 14 
+block 11 name "magnet2"
+
+block 12 add surface 11
+block 12 name "Motion_air"
+
+nodeset 1 add curve 3 67 63 
+nodeset 1 name "Periodic"
+
+nodeset 2 add curve 68 72
+nodeset 2 name "Motion_rotation"
+

@@ -2,17 +2,16 @@
 # Copyright (c) 2024 Kengo Sugahara
 # License: BSD 3 clause
 
-from setuptools import setup
-import cubit_mesh_export
+from setuptools import setup, find_packages
 
 DESCRIPTION = "Cubit_Mesh_Export: Cubit mesh export to Gmsh format"
-NAME = 'cubit_mesh_export'
+NAME = 'Coreform_Cubit_Export_Mesh'
 AUTHOR = 'Kengo Sugahara'
 AUTHOR_EMAIL = 'ksugahar@gmail.com'
-URL = 'https://github.com/ksugahar/Coreform_Cubit_Python_API'
+URL = 'https://github.com/ksugahar/Coreform_Cubit_Export_Mesh'
 LICENSE = 'BSD 3-Clause'
-DOWNLOAD_URL = 'https://github.com/ksugahar/Coreform_Cubit_Python_API'
-VERSION =  '0.8.4'
+DOWNLOAD_URL = 'https://github.com/ksugahar/Coreform_Cubit_Export_Mesh'
+VERSION =  '0.9.1'
 PYTHON_REQUIRES = ">=3.7"
 
 INSTALL_REQUIRES = [
@@ -23,9 +22,8 @@ INSTALL_REQUIRES = [
 EXTRAS_REQUIRE = {
 }
 
-PACKAGES = [
-	'.'
-]
+PACKAGES = find_packages()
+PY_MODULES = ['cubit_mesh_export']
 
 CLASSIFIERS = [
 	'Intended Audience :: Science/Research',
@@ -46,7 +44,8 @@ setup(name=NAME,
       maintainer=AUTHOR,
       maintainer_email=AUTHOR_EMAIL,
       description=DESCRIPTION,
-      long_description='',
+      long_description=open('README.md', 'r', encoding='utf-8').read(),
+      long_description_content_type='text/markdown',
       license=LICENSE,
       url=URL,
       version=VERSION,
@@ -55,5 +54,6 @@ setup(name=NAME,
       install_requires=INSTALL_REQUIRES,
       extras_require=EXTRAS_REQUIRE,
       packages=PACKAGES,
+      py_modules=PY_MODULES,
       classifiers=CLASSIFIERS,
     )
