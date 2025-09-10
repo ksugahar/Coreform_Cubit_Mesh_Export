@@ -64,14 +64,12 @@ def export_3D_mesh(cubit, FileName):
 		for nodeset_id in nodeset_list:
 			surface_list = cubit.get_nodeset_surfaces(nodeset_id)
 			for surface_id in surface_list:
+				nodeset_surface_list.append(surface_id)
 				tri_list = cubit.get_surface_tris(surface_id)
 				if len(tri_list)>0:
 					for tri_id in tri_list:
 						node_list = cubit.get_connectivity("tri", tri_id)
 						fid.write(f'{node_list[0]} {node_list[1]} {node_list[2]} {nodeset_id}\n')
-		for surface_id in nodeset_surface_list:
-			quad_list += cubit.get_surface_quads(surface_id)
-			tri_list += cubit.get_surface_tris(surface_id)
 
 		fid.write("\n")
 		fid.write("End\n")
@@ -482,10 +480,13 @@ def export_3D_gmsh_ver4(cubit, FileName):
 				hex_all_list += cubit.get_volume_hexes(volume_id)
 				wedge_all_list += cubit.get_volume_wedges(volume_id)
 
-		elementTag = 0
+		elementTag = 1
 
 		all_list =  quad_all_list + tri_all_list + hex_all_list + tet_all_list  + wedge_all_list
-		fid.write(f'{ nodeset_surface_count + block_volume_count} {len(all_list)} {min(all_list)} {max(all_list)}\n')
+		if len(all_list) > 0:
+			fid.write(f'{ nodeset_surface_count + block_volume_count} {len(all_list)} {min(all_list)} {max(all_list)}\n')
+		else:
+			fid.write(f'{ nodeset_surface_count + block_volume_count} 0 0 0\n')
 
 		for nodeset_id in cubit.get_nodeset_id_list():
 			surface_list = cubit.get_nodeset_surfaces(nodeset_id)
@@ -530,7 +531,7 @@ def export_3D_gmsh_ver4(cubit, FileName):
 					for wedge_id in wedge_list:
 						node_list = cubit.get_connectivity("wedge", wedge_id)
 						elementTag +=1
-						fid.write(f'{elementTag} {node_list[0]} {node_list[1]} {node_list[2]} {node_list[3]}\n')
+						fid.write(f'{elementTag} {node_list[0]} {node_list[1]} {node_list[2]} {node_list[3]} {node_list[4]} {node_list[5]}\n')
 
 		fid.write('$EndElements\n')
 		fid.close()
@@ -549,7 +550,7 @@ def export_1D_Nastran(cubit, FileName):
 	fid.write("$\n")
 	fid.write("$                         CUBIT NX Nastran Translator\n")
 	fid.write("$\n")
-	fid.write("f$            File: {FileName}\n")
+	fid.write(f"$            File: {FileName}\n")
 	fid.write(f"$      Time Stamp: {formatted_date_time}\n")
 	fid.write("$\n")
 	fid.write("$\n")
@@ -645,7 +646,7 @@ def export_2D_Nastran(cubit, FileName):
 	fid.write("$\n")
 	fid.write("$                         CUBIT NX Nastran Translator\n")
 	fid.write("$\n")
-	fid.write("f$            File: {FileName}\n")
+	fid.write(f"$            File: {FileName}\n")
 	fid.write(f"$      Time Stamp: {formatted_date_time}\n")
 	fid.write("$\n")
 	fid.write("$\n")
@@ -756,7 +757,7 @@ def export_3D_Nastran(cubit, FileName, Pyram=True):
 	fid.write("$\n")
 	fid.write("$                         CUBIT NX Nastran Translator\n")
 	fid.write("$\n")
-	fid.write("f$            File: {FileName}\n")
+	fid.write(f"$            File: {FileName}\n")
 	fid.write(f"$      Time Stamp: {formatted_date_time}\n")
 	fid.write("$\n")
 	fid.write("$\n")
@@ -1197,8 +1198,10 @@ def export_3D_vtk(cubit, FileName):
 		node_list = cubit.get_connectivity("hex", hex_id)
 		fid.write(f'8 {node_list[0]-1} {node_list[1]-1} {node_list[2]-1} {node_list[3]-1} {node_list[4]-1} {node_list[5]-1} {node_list[6]-1} {node_list[7]-1}\n')
 	for wedge_id in wedge_list:
+		node_list = cubit.get_connectivity("wedge", wedge_id)
 		fid.write(f'6 {node_list[0]-1} {node_list[1]-1} {node_list[2]-1} {node_list[3]-1} {node_list[4]-1} {node_list[5]-1} \n')
 	for pyramid_id in pyramid_list:
+		node_list = cubit.get_connectivity("pyramid", pyramid_id)
 		fid.write(f'5 {node_list[0]-1} {node_list[1]-1} {node_list[2]-1} {node_list[3]-1} {node_list[4]-1} \n')
 
 	fid.write(f'CELL_TYPES {len(tet_list) + len(hex_list) + len(wedge_list) + len(pyramid_list)}\n')
@@ -1227,6 +1230,7 @@ def export_2D_geo_mesh(cubit, FileName):
 	import numpy
 	import scipy.io
 
+	nodes = []
 	node_list = []
 
 	N = cubit.get_node_count()

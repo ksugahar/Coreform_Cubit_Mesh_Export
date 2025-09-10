@@ -113,6 +113,16 @@ Kengo Sugahara (ksugahar@gmail.com)
 
 ## 変更履歴
 
+### v0.9.4 (2025-09-11)
+- **バグ修正**
+  - Gmsh v4形式: Wedge要素のノード出力を4個から6個に修正
+  - Gmsh v4形式: 要素タグを0ではなく1から開始するよう修正
+  - Gmsh v4形式: 空の要素リストでmin/max関数がエラーになる問題を修正
+  - VTK形式: WedgeとPyramid要素のconnectivity取得処理が欠落していた問題を修正
+  - NASTRAN形式: f-string構文エラーを修正
+  - FreeFEM形式: 未定義変数`nodeset_surface_list`の問題を修正
+  - geo_mesh形式: 未定義変数`nodes`の初期化を追加
+
 ### v0.9.3 (2025-01)
 - パッケージ名を`Coreform_Cubit_Mesh_Export`に統一
 - `pyproject.toml`ベースの最新パッケージング方式に移行
