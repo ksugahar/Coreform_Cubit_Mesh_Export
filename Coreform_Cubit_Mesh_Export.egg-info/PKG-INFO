@@ -1,34 +1,31 @@
 Metadata-Version: 2.4
 Name: Coreform_Cubit_Mesh_Export
-Version: 0.9.1
-Summary: Cubit_Mesh_Export: Cubit mesh export to Gmsh format
-Home-page: https://github.com/ksugahar/Coreform_Cubit_Mesh_Export
-Download-URL: https://github.com/ksugahar/Coreform_Cubit_Mesh_Export
-Author: Kengo Sugahara
+Version: 0.9.3
+Summary: Cubit mesh export to various formats including Gmsh, Nastran, and VTK
 Author-email: Kengo Sugahara <ksugahar@gmail.com>
-Maintainer: Kengo Sugahara
-Maintainer-email: ksugahar@gmail.com
+Maintainer-email: Kengo Sugahara <ksugahar@gmail.com>
+License: BSD-3-Clause
 Project-URL: Homepage, https://github.com/ksugahar/Coreform_Cubit_Mesh_Export
 Project-URL: Repository, https://github.com/ksugahar/Coreform_Cubit_Mesh_Export
+Project-URL: Bug Tracker, https://github.com/ksugahar/Coreform_Cubit_Mesh_Export/issues
+Keywords: cubit,mesh,gmsh,nastran,vtk,export,coreform
+Classifier: Development Status :: 4 - Beta
 Classifier: Intended Audience :: Science/Research
 Classifier: License :: OSI Approved :: BSD License
+Classifier: Operating System :: OS Independent
 Classifier: Programming Language :: Python :: 3
 Classifier: Programming Language :: Python :: 3.7
 Classifier: Programming Language :: Python :: 3.8
 Classifier: Programming Language :: Python :: 3.9
 Classifier: Programming Language :: Python :: 3.10
 Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
 Classifier: Topic :: Scientific/Engineering
+Classifier: Topic :: Scientific/Engineering :: Physics
 Requires-Python: >=3.7
 Description-Content-Type: text/markdown
 Requires-Dist: numpy>=1.20.3
 Requires-Dist: scipy>=1.6.3
-Dynamic: author
-Dynamic: download-url
-Dynamic: home-page
-Dynamic: maintainer
-Dynamic: maintainer-email
-Dynamic: requires-python
 
 # インストール方法
 
