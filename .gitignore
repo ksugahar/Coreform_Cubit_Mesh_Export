@@ -1,3 +1,66 @@
+# Local development files
 .gitignore
 git_push.cmd
 claude.md
+CLAUDE.md
+
+# Python build artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Cubit specific files
+*.model
+*.mai
+*.viewinfo
+*.mag
+*.mao
+*.mat
+*.mos
+*.mac
+*.meg
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Virtual environments
+venv/
+ENV/
+env/
+
+# Documentation builds
+docs/_build/
+
+# Test coverage
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Local configuration
+.env
+*.local
+
+# Claude AI project files
+.claude/
