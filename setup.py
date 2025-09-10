@@ -5,12 +5,12 @@
 from setuptools import setup, find_packages
 
 DESCRIPTION = "Cubit_Mesh_Export: Cubit mesh export to Gmsh format"
-NAME = 'Coreform_Cubit_Export_Mesh'
+NAME = 'Coreform_Cubit_Mesh_Export'
 AUTHOR = 'Kengo Sugahara'
 AUTHOR_EMAIL = 'ksugahar@gmail.com'
-URL = 'https://github.com/ksugahar/Coreform_Cubit_Export_Mesh'
+URL = 'https://github.com/ksugahar/Coreform_Cubit_Mesh_Export'
 LICENSE = 'BSD 3-Clause'
-DOWNLOAD_URL = 'https://github.com/ksugahar/Coreform_Cubit_Export_Mesh'
+DOWNLOAD_URL = 'https://github.com/ksugahar/Coreform_Cubit_Mesh_Export'
 VERSION =  '0.9.2'
 PYTHON_REQUIRES = ">=3.7"
 

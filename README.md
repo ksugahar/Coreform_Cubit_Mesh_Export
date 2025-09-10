@@ -2,13 +2,13 @@
 
 ## PyPIから直接インストール（推奨）
 ```
-pip install --upgrade Coreform_Cubit_Export_Mesh
+pip install --upgrade Coreform_Cubit_Mesh_Export
 ```
 
 Cubit内蔵Pythonの場合:
 ```
 cd "C:\Program Files\Coreform Cubit 2025.3\bin\python3\"
-python.exe -m pip install --upgrade Coreform_Cubit_Export_Mesh
+python.exe -m pip install --upgrade Coreform_Cubit_Mesh_Export
 ```
 ----
 # サポートしているファイル

@@ -3,7 +3,7 @@ requires = ["setuptools>=45", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "Coreform_Cubit_Export_Mesh"
+name = "Coreform_Cubit_Mesh_Export"
 version = "0.9.1"
 authors = [
     {name = "Kengo Sugahara", email = "ksugahar@gmail.com"},
@@ -28,5 +28,5 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/ksugahar/Coreform_Cubit_Export_Mesh"
-Repository = "https://github.com/ksugahar/Coreform_Cubit_Export_Mesh"
+Homepage = "https://github.com/ksugahar/Coreform_Cubit_Mesh_Export"
+Repository = "https://github.com/ksugahar/Coreform_Cubit_Mesh_Export"
