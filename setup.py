@@ -11,7 +11,7 @@ AUTHOR_EMAIL = 'ksugahar@gmail.com'
 URL = 'https://github.com/ksugahar/Coreform_Cubit_Export_Mesh'
 LICENSE = 'BSD 3-Clause'
 DOWNLOAD_URL = 'https://github.com/ksugahar/Coreform_Cubit_Export_Mesh'
-VERSION =  '0.9.1'
+VERSION =  '0.9.2'
 PYTHON_REQUIRES = ">=3.7"
 
 INSTALL_REQUIRES = [

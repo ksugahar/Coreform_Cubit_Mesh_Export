@@ -7,7 +7,7 @@ https://github.com/ksugahar/Coreform_Cubit_Export_Mesh
 pip install --upgrade git+https://github.com/ksugahar/Coreform_Cubit_Python_API.git
 としていますが、
 
-pip install --upgrade Coreform_Cubit_Export_Mesh
+pip install --upgrade Coreform_Cubit_Mesh_Export
 でインストール可能な仕様に変更したいです。
 Windowsユーザーを対象とした場合、git for windowsのインストールを前提としたくないです。
 

@@ -1,15 +1,14 @@
 # インストール方法
 
-## 方法1: PyPIから直接インストール（推奨）
+## PyPIから直接インストール（推奨）
 ```
 pip install --upgrade Coreform_Cubit_Export_Mesh
 ```
 
-## 方法2: GitHubから直接インストール
-Windowsであれば，[Windows版のGIT](https://gitforwindows.org/) をインストールします。
+Cubit内蔵Pythonの場合:
 ```
-cd ""C:\Program Files\Coreform Cubit 2025.3\bin\python3\"
-python.exe -m pip install --upgrade git+https://github.com/ksugahar/Coreform_Cubit_Export_Mesh.git
+cd "C:\Program Files\Coreform Cubit 2025.3\bin\python3\"
+python.exe -m pip install --upgrade Coreform_Cubit_Export_Mesh
 ```
 ----
 # サポートしているファイル
