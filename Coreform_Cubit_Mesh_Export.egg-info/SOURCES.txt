@@ -6,4 +6,3 @@ Coreform_Cubit_Mesh_Export.egg-info/SOURCES.txt
 Coreform_Cubit_Mesh_Export.egg-info/dependency_links.txt
 Coreform_Cubit_Mesh_Export.egg-info/requires.txt
 Coreform_Cubit_Mesh_Export.egg-info/top_level.txt
-file_format/ngsolve_read_gmsh.py
