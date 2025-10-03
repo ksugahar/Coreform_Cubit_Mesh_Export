@@ -1,8 +1,8 @@
 # Local development files
 .gitignore
-git_push.cmd
 claude.md
-CLAUDE.md
+git_push.sh
+python_build.cmd
 
 # Python build artifacts
 __pycache__/
