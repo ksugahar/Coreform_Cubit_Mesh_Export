@@ -839,7 +839,7 @@ def export_3D_Nastran(cubit, FileName, Pyram=True):
 			for wedge_id in wedge_list:
 				node_list = cubit.get_connectivity('wedge',wedge_id)
 				element_id += 1
-				fid.write(f"CHEXA   {element_id:>8}{block_id:>8}{node_list[0]:>8}{node_list[1]:>8}{node_list[2]:>8}{node_list[3]:>8}{node_list[4]:>8}{node_list[5]:>8}\n")
+				fid.write(f"CPENTA  {element_id:>8}{block_id:>8}{node_list[0]:>8}{node_list[1]:>8}{node_list[2]:>8}{node_list[3]:>8}{node_list[4]:>8}{node_list[5]:>8}\n")
 			pyramid_list = cubit.get_volume_pyramids(volume_id)
 			for pyramid_id in pyramid_list:
 				node_list = cubit.get_connectivity('pyramid',pyramid_id)
