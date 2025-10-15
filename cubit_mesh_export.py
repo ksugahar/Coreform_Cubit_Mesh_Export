@@ -30,8 +30,15 @@ def export_3D_mesh(cubit, FileName):
 
 		node_set = set()
 		for block_id in cubit.get_block_id_list():
-			volume_list = cubit.get_block_volumes(block_id)
-			node_set.update(cubit.parse_cubit_list( 'node', f'in volume {" ".join(map(str, volume_list)) }' ) )
+			elem_types = ["hex", "tet", "wedge", "pyramid"]
+			for elem_type in elem_types:
+				if elem_type == "hex":
+					func = getattr(cubit, f"get_block_{elem_type}es")
+				else:
+					func = getattr(cubit, f"get_block_{elem_type}s")
+				for element_id in func(block_id):
+					node_ids = cubit.get_connectivity(elem_type, element_id)
+					node_set.update(node_ids)
 		for node_id in node_set:
 			coord = cubit.get_nodal_coordinates(node_id)
 			fid.write(f'{coord[0]} {coord[1]} {coord[2]} {0}\n')
@@ -104,8 +111,12 @@ def export_2D_gmsh_ver2(cubit, FileName):
 
 		node_set = set()
 		for block_id in cubit.get_block_id_list():
-			surface_list = cubit.get_block_surfaces(block_id)
-			node_set.update(cubit.parse_cubit_list( 'node', f'in surface {" ".join(map(str, surface_list)) }' ))
+			elem_types = ["tri", "quad"]
+			for elem_type in elem_types:
+				func = getattr(cubit, f"get_block_{elem_type}s")
+				for element_id in func(block_id):
+					node_ids = cubit.get_connectivity(elem_type, element_id)
+					node_set.update(node_ids)
 		fid.write(f'{len(node_set)}\n')
 		for node_id in node_set:
 			coord = cubit.get_nodal_coordinates(node_id)
@@ -201,8 +212,15 @@ def export_3D_gmsh_ver2(cubit, FileName):
 
 		node_set = set()
 		for block_id in cubit.get_block_id_list():
-			volume_list = cubit.get_block_volumes(block_id)
-			node_set.update(cubit.parse_cubit_list( 'node', f'in volume {" ".join(map(str, volume_list)) }' ))
+			elem_types = ["hex", "tet", "wedge", "pyramid"]
+			for elem_type in elem_types:
+				if elem_type == "hex":
+					func = getattr(cubit, f"get_block_{elem_type}es")
+				else:
+					func = getattr(cubit, f"get_block_{elem_type}s")
+				for element_id in func(block_id):
+					node_ids = cubit.get_connectivity(elem_type, element_id)
+					node_set.update(node_ids)
 		fid.write(f'{len(node_set)}\n')
 		for node_id in node_set:
 			coord = cubit.get_nodal_coordinates(node_id)
@@ -600,8 +618,12 @@ def export_1D_Nastran(cubit, FileName):
 
 	node_set = set()
 	for block_id in cubit.get_block_id_list():
-		curve_list = cubit.get_block_curves(block_id)
-		node_set.update(cubit.parse_cubit_list( 'node', f'in curve {" ".join(map(str, curve_list)) }' ))
+		elem_types = ["beam"]
+		for elem_type in elem_types:
+			func = getattr(cubit, f"get_block_{elem_type}s")
+			for element_id in func(block_id):
+				node_ids = cubit.get_connectivity(elem_type, element_id)
+				node_set.update(node_ids)
 	for node_id in node_set:
 		coord = cubit.get_nodal_coordinates(node_id)
 		fid.write(f"GRID*   {node_id:>16}{0:>16}{coord[0]:>16.5f}{coord[1]:>16.5f}\n*       {coord[2]:>16.5f}\n")
@@ -696,8 +718,12 @@ def export_2D_Nastran(cubit, FileName):
 
 	node_set = set()
 	for block_id in cubit.get_block_id_list():
-		surface_list = cubit.get_block_surfaces(block_id)
-		node_set.update(cubit.parse_cubit_list( 'node', f'in surface {" ".join(map(str, surface_list)) }' ))
+		elem_types = ["tri", "quad"]
+		for elem_type in elem_types:
+			func = getattr(cubit, f"get_block_{elem_type}s")
+			for element_id in func(block_id):
+				node_ids = cubit.get_connectivity(elem_type, element_id)
+				node_set.update(node_ids)
 	for node_id in node_set:
 		coord = cubit.get_nodal_coordinates(node_id)
 		fid.write(f"GRID*   {node_id:>16}{0:>16}{coord[0]:>16.5f}{coord[1]:>16.5f}\n*       {coord[2]:>16.5f}\n")
@@ -807,8 +833,15 @@ def export_3D_Nastran(cubit, FileName, Pyram=True):
 
 	node_set = set()
 	for block_id in cubit.get_block_id_list():
-		volume_list = cubit.get_block_volumes(block_id)
-		node_set.update(cubit.parse_cubit_list( 'node', f'in volume {" ".join(map(str, volume_list)) }' ))
+		elem_types = ["hex", "tet", "wedge", "pyramid"]
+		for elem_type in elem_types:
+			if elem_type == "hex":
+				func = getattr(cubit, f"get_block_{elem_type}es")
+			else:
+				func = getattr(cubit, f"get_block_{elem_type}s")
+			for element_id in func(block_id):
+				node_ids = cubit.get_connectivity(elem_type, element_id)
+				node_set.update(node_ids)
 	fid.write(f'{len(node_set)}\n')
 	for node_id in node_set:
 		coord = cubit.get_nodal_coordinates(node_id)
@@ -895,8 +928,15 @@ def export_3D_CDB(cubit, FileName):
 
 	node_set = set()
 	for block_id in cubit.get_block_id_list():
-		volume_list = cubit.get_block_volumes(block_id)
-		node_set.update(cubit.parse_cubit_list( 'node', f'in volume {" ".join(map(str, volume_list)) }' ))
+		elem_types = ["hex", "tet", "wedge", "pyramid"]
+		for elem_type in elem_types:
+			if elem_type == "hex":
+				func = getattr(cubit, f"get_block_{elem_type}es")
+			else:
+				func = getattr(cubit, f"get_block_{elem_type}s")
+			for element_id in func(block_id):
+				node_ids = cubit.get_connectivity(elem_type, element_id)
+				node_set.update(node_ids)
 	fid.write(f'{len(node_set)}\n')
 	for node_id in node_set:
 		coord = cubit.get_nodal_coordinates(node_id)
@@ -959,16 +999,13 @@ def export_3D_CDB(cubit, FileName):
 		name = cubit.get_exodus_entity_name("nodeset",nodeset_id)
 
 		node_set.clear()
-		surface_list = cubit.get_nodeset_surfaces(nodeset_id)
-		for surface_id in surface_list:
-			quad_list = cubit.get_surface_quads(surface_id)
-			for quad_id in quad_list:
-				node_list = cubit.get_connectivity("quad", quad_id)
-				node_set.update(node_list)
-			tri_list = cubit.get_surface_tris(surface_id)
-			for tri_id in tri_list:
-				node_list = cubit.get_connectivity("tri", tri_id)
-				node_set.update(node_list)
+		for block_id in cubit.get_block_id_list():
+			elem_types = ["tri", "quad"]
+			for elem_type in elem_types:
+				func = getattr(cubit, f"get_block_{elem_type}s")
+				for element_id in func(block_id):
+					node_ids = cubit.get_connectivity(elem_type, element_id)
+					node_set.update(node_ids)
 
 		fid.write(f'CMBLOCK,{name:<8},NODE,{len(node_set):8d}\n')
 		fid.write(f'(8i10)\n')
@@ -996,8 +1033,12 @@ def export_1D_meg(cubit, FileName, Dim='T', MGR2=[] ):
 
 	node_set = set()
 	for block_id in cubit.get_block_id_list():
-		curve_list = cubit.get_block_curves(block_id)
-		node_set.update(cubit.parse_cubit_list( 'node', f'in curve {" ".join(map(str, curve_list)) }' ))
+		elem_types = ["beam"]
+		for elem_type in elem_types:
+			func = getattr(cubit, f"get_block_{elem_type}s")
+			for element_id in func(block_id):
+				node_ids = cubit.get_connectivity(elem_type, element_id)
+				node_set.update(node_ids)
 	for node_id in node_set:
 		coord = cubit.get_nodal_coordinates(node_id)
 		if Dim=='T':
@@ -1038,10 +1079,14 @@ def export_2D_meg(cubit, FileName, Dim='T', MGR2=[]):
 	fid.write("MGSC 0.001\n")
 	fid.write("* NODE\n")
 
-	node_set = set()
+	node_set.clear()
 	for block_id in cubit.get_block_id_list():
-		surface_list = cubit.get_block_surfaces(block_id)
-		node_set.update(cubit.parse_cubit_list( 'node', f'in surface {" ".join(map(str, surface_list)) }' ))
+		elem_types = ["tri", "quad"]
+		for elem_type in elem_types:
+			func = getattr(cubit, f"get_block_{elem_type}s")
+			for element_id in func(block_id):
+				node_ids = cubit.get_connectivity(elem_type, element_id)
+				node_set.update(node_ids)
 	for node_id in node_set:
 		coord = cubit.get_nodal_coordinates(node_id)
 		if Dim=='T':
@@ -1090,8 +1135,15 @@ def export_3D_meg(cubit, FileName, Dim='T', MGR2=[], Pyram=True):
 
 	node_set = set()
 	for block_id in cubit.get_block_id_list():
-		volume_list = cubit.get_block_volumes(block_id)
-		node_set.update(cubit.parse_cubit_list( 'node', f'in volume {" ".join(map(str, volume_list)) }' ))
+		elem_types = ["hex", "tet", "wedge", "pyramid"]
+		for elem_type in elem_types:
+			if elem_type == "hex":
+				func = getattr(cubit, f"get_block_{elem_type}es")
+			else:
+				func = getattr(cubit, f"get_block_{elem_type}s")
+			for element_id in func(block_id):
+				node_ids = cubit.get_connectivity(elem_type, element_id)
+				node_set.update(node_ids)
 	for node_id in node_set:
 		coord = cubit.get_nodal_coordinates(node_id)
 		if Dim=='T':
@@ -1238,9 +1290,15 @@ def export_2D_geo_mesh(cubit, FileName):
 
 	node_set = set()
 	for block_id in cubit.get_block_id_list():
-		volume_list = cubit.get_block_volumes(block_id)
-		node_set.update(cubit.parse_cubit_list( 'node', f'in volume {" ".join(map(str, volume_list)) }' ))
-
+		elem_types = ["hex", "tet", "wedge", "pyramid"]
+		for elem_type in elem_types:
+			if elem_type == "hex":
+				func = getattr(cubit, f"get_block_{elem_type}es")
+			else:
+				func = getattr(cubit, f"get_block_{elem_type}s")
+			for element_id in func(block_id):
+				node_ids = cubit.get_connectivity(elem_type, element_id)
+				node_set.update(node_ids)
 	for node_id in node_set:
 		coord = cubit.get_nodal_coordinates(node_id)
 		nodes.append([coord[0],coord[1]])
