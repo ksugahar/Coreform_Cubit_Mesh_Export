@@ -6,3 +6,7 @@ Coreform_Cubit_Mesh_Export.egg-info/SOURCES.txt
 Coreform_Cubit_Mesh_Export.egg-info/dependency_links.txt
 Coreform_Cubit_Mesh_Export.egg-info/requires.txt
 Coreform_Cubit_Mesh_Export.egg-info/top_level.txt
+sample_script/cubit_mesh_export_2d_geo_lukas_format.py
+sample_script/cubit_mesh_export_3d_cdb.py
+sample_script/cubit_mesh_export_3d_freefem_mesh.py
+sample_script/cubit_mesh_export_3d_gmesh_v4.py
