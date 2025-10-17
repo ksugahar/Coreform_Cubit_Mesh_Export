@@ -1,0 +1,231 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$
+$                         CUBIT NX Nastran Translator
+$
+$            File: ./examples/hex20_pyramid13_tetra10_wedge15.bdf
+$      Time Stamp: 17-Oct-25 at 20:07:40
+$
+$
+$                        PLEASE CHECK YOUR MODEL FOR UNITS CONSISTENCY.
+$
+$       It should be noted that load ID's from CUBIT may NOT correspond to Nastran SID's
+$ The SID's for the load and restraint sets start at one and increment by one:i.e.,1,2,3,4...
+$
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$
+$
+$ -------------------------
+$ Executive Control Section
+$ -------------------------
+$
+SOL 101
+CEND
+$
+$
+$ --------------------
+$ Case Control Section
+$ --------------------
+$
+ECHO = SORT
+$
+$
+$ Name: Initial
+$
+$
+$ Name: Default Set
+$
+SUBCASE = 1
+$
+LABEL = Default Set
+$
+$ -----------------
+$ Bulk Data Section
+$ -----------------
+$
+BEGIN BULK
+$
+$ Params
+$
+$
+$ Node cards
+$
+26
+GRID*                  1               0         0.50000        -0.50000
+*                1.00000
+GRID*                  2               0         0.50000         0.50000
+*                1.00000
+GRID*                  3               0        -0.50000         0.50000
+*                1.00000
+GRID*                  4               0        -0.50000        -0.50000
+*                1.00000
+GRID*                  5               0         0.50000         0.50000
+*               -1.00000
+GRID*                  6               0         0.50000        -0.50000
+*               -1.00000
+GRID*                  7               0        -0.50000        -0.50000
+*               -1.00000
+GRID*                  8               0        -0.50000         0.50000
+*               -1.00000
+GRID*                  9               0        -0.50000        -0.50000
+*                0.00000
+GRID*                 10               0         0.50000        -0.50000
+*                0.00000
+GRID*                 11               0        -0.50000         0.50000
+*                0.00000
+GRID*                 12               0         0.50000         0.50000
+*                0.00000
+GRID*                 13               0         0.50000        -1.50000
+*                1.00000
+GRID*                 14               0        -0.50000        -1.50000
+*                1.00000
+GRID*                 15               0         0.50000        -1.50000
+*               -1.00000
+GRID*                 16               0        -0.50000        -1.50000
+*               -1.00000
+GRID*                 17               0        -0.50000        -1.50000
+*                0.00000
+GRID*                 18               0         0.50000        -1.50000
+*                0.00000
+GRID*                 19               0         0.00000        -1.20711
+*                0.50000
+GRID*                 20               0         0.00000        -1.20711
+*               -0.50000
+GRID*                 21               0         0.50000        -2.50000
+*               -1.00000
+GRID*                 22               0        -0.50000        -2.50000
+*               -1.00000
+GRID*                 23               0        -0.50000        -2.50000
+*                1.00000
+GRID*                 24               0        -0.50000        -2.50000
+*                0.00000
+GRID*                 25               0         0.50000        -2.50000
+*                1.00000
+GRID*                 26               0         0.50000        -2.50000
+*                0.00000
+$
+$ Element cards
+$
+$
+$ Name: MMB8_hex
+$
+CHEXA          1       1       4       9      11       3       1      10+
++             12       2
+CHEXA          2       1       9       7       8      11      10       6+
++              5      12
+$
+$ Name: MMB8_pyramid
+$
+CHEXA          3       2      10       1       4       9      19      19+
++             19      19
+CHEXA          4       2       6      10       9       7      20      20+
++             20      20
+$
+$ Name: MMB4_tetra
+$
+CTETRA         5       3      19       4      13       1
+CTETRA         6       3      20      15       7       6
+CTETRA         7       3      14      19       4      13
+CTETRA         8       3      14      19      18      17
+CTETRA         9       3      19      17       4       9
+CTETRA        10       3      20      18      17      15
+CTETRA        11       3      16      20       7       9
+CTETRA        12       3      10      19      13       1
+CTETRA        13       3      20      19       9      17
+CTETRA        14       3      14      19      17       4
+CTETRA        15       3      10      20       6      18
+CTETRA        16       3      20      18      15       6
+CTETRA        17       3      16      20      15       7
+CTETRA        18       3      16      20      17      15
+CTETRA        19       3      20      19      17      18
+CTETRA        20       3      10      20      19       9
+CTETRA        21       3      10      20      18      19
+CTETRA        22       3      14      19      13      18
+CTETRA        23       3      16      20       9      17
+CTETRA        24       3      10      19      18      13
+$
+$ Name: MMB6_wedge
+$
+CPENTA        25       4      21      24      26      15      17      18
+CPENTA        26       4      26      23      25      18      14      13
+CPENTA        27       4      22      24      21      16      17      15
+CPENTA        28       4      24      23      26      17      14      18
+$
+$ Name: MMT3_wedge
+$
+CTRIA3  29      5       13      1       4       
+CTRIA3  30      5       14      13      4       
+CTRIA3  31      5       7       6       15      
+CTRIA3  32      5       7       15      16      
+CTRIA3  33      5       4       9       17      
+CTRIA3  34      5       9       7       16      
+CTRIA3  35      5       4       17      14      
+CTRIA3  36      5       9       16      17      
+CTRIA3  37      5       10      1       13      
+CTRIA3  38      5       6       10      18      
+CTRIA3  39      5       10      13      18      
+CTRIA3  40      5       6       18      15      
+$
+$ Name: MMT4_wedge
+$
+CQUAD4  41      6       1       2       3       4       
+CQUAD4  42      6       5       6       7       8       
+CQUAD4  43      6       3       11      9       4       
+CQUAD4  44      6       11      8       7       9       
+CQUAD4  45      6       2       12      11      3       
+CQUAD4  46      6       12      5       8       11      
+CQUAD4  47      6       1       10      12      2       
+CQUAD4  48      6       10      6       5       12      
+$
+$ Name: MCL2_edge
+$
+CROD    49      7       1       2       
+CROD    50      7       2       3       
+CROD    51      7       3       4       
+CROD    52      7       4       1       
+CROD    53      7       5       6       
+CROD    54      7       6       7       
+CROD    55      7       7       8       
+CROD    56      7       8       5       
+CROD    57      7       3       11      
+CROD    58      7       11      8       
+CROD    59      7       4       9       
+CROD    60      7       9       7       
+CROD    61      7       11      9       
+CROD    62      7       2       12      
+CROD    63      7       12      5       
+CROD    64      7       12      11      
+CROD    65      7       1       10      
+CROD    66      7       10      6       
+CROD    67      7       10      12      
+$
+$ Property cards
+$
+$
+$ Name: MMB8_hex
+$
+MAT1     1      1       1       1       
+$
+$ Name: MMB8_pyramid
+$
+MAT1     2      1       1       1       
+$
+$ Name: MMB4_tetra
+$
+MAT1     3      1       1       1       
+$
+$ Name: MMB6_wedge
+$
+MAT1     4      1       1       1       
+$
+$ Name: MMT3_wedge
+$
+MAT1     5      1       1       1       
+$
+$ Name: MMT4_wedge
+$
+MAT1     6      1       1       1       
+$
+$ Name: MCL2_edge
+$
+MAT1     7      1       1       1       
+ENDDATA

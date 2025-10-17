@@ -1,0 +1,48 @@
+reset
+brick x 1 y 1 z 2
+Volume 1  copy reflect vertex 6 5 
+
+imprint all
+merge all
+compress
+
+volume 1 size 1
+mesh volume 1
+
+volume 2  scheme tetmesh
+volume 2 size 1
+mesh volume 2
+
+sweep surface 10  perpendicular distance 1include_mesh  keep 
+
+imprint all
+merge all
+compress
+
+block 1 add hex all in volume 1
+block 1 name "MMB8_hex"
+block 1 element type HEX20
+
+block 2 add Pyramid all in volume 2
+block 2 name "MMB8_pyramid"
+block 2 element type PYRAMID13
+
+block 3 add tet all in volume 2
+block 3 name "MMB4_tetra"
+block 3 element type TETRA10
+
+block 4 add wedge all in volume 3
+block 4 name "MMB6_wedge"
+block 4 element type WEDGE15
+
+block 5 add tri all in (surface with not is_merged in volume 2)
+block 5 name "MMT3_wedge"
+block 5 element type tri6
+
+block 6 add face all in (surface with not is_merged in volume 1)
+block 6 name "MMT4_wedge"
+block 6 element type quad8
+
+block 7 edge all in (surface with not is_merged in volume 1)
+block 7 name "MCL2_edge"
+block 7 element type bar3

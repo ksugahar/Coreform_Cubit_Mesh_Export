@@ -1,0 +1,28 @@
+reset
+
+create surface rectangle width 2 height 1 zplane 
+Surface 1 copy move y -1 
+
+imprint all
+merge all
+compress
+
+surface 1  size 1
+mesh surface 1 
+
+surface 2  scheme trimesh
+surface 2 size 1
+mesh surface 2
+
+block 1 add face all in surface 1
+block 1 name "MMB4_quad"
+block 1 element type quad8
+
+block 2 add tri all in surface 2
+block 2 name "MMB3_tri"
+block 2 element type tri6
+
+block 3 edge all in (curve with not is_merged in surface 1 2)
+block 3 name "MMT2_edge"
+block 3 element type bar3
+

@@ -1,6 +1,6 @@
 Metadata-Version: 2.4
 Name: Coreform_Cubit_Mesh_Export
-Version: 1.0.3
+Version: 1.0.4
 Summary: Cubit mesh export to various formats including Gmsh, Nastran, and VTK
 Author-email: Kengo Sugahara <ksugahar@gmail.com>
 Maintainer-email: Kengo Sugahara <ksugahar@gmail.com>

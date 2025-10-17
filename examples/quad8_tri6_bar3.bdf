@@ -1,0 +1,111 @@
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$
+$                         CUBIT NX Nastran Translator
+$
+$            File: ./examples/quad8_tri6_bar3.bdf
+$      Time Stamp: 17-Oct-25 at 18:42:33
+$
+$
+$                        PLEASE CHECK YOUR MODEL FOR UNITS CONSISTENCY.
+$
+$       It should be noted that load ID's from CUBIT may NOT correspond to Nastran SID's
+$ The SID's for the load and restraint sets start at one and increment by one:i.e.,1,2,3,4...
+$
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$
+$
+$ -------------------------
+$ Executive Control Section
+$ -------------------------
+$
+SOL 101
+CEND
+$
+$
+$ --------------------
+$ Case Control Section
+$ --------------------
+$
+ECHO = SORT
+$
+$
+$ Name: Initial
+$
+$
+$ Name: Default Set
+$
+SUBCASE = 1
+$
+LABEL = Default Set
+$
+$ -----------------
+$ Bulk Data Section
+$ -----------------
+$
+BEGIN BULK
+$
+$ Params
+$
+$
+$ Node cards
+$
+GRID*                  1               0         1.00000         0.50000
+*                0.00000
+GRID*                  2               0        -1.00000         0.50000
+*                0.00000
+GRID*                  3               0         0.00000         0.50000
+*                0.00000
+GRID*                  4               0        -1.00000        -0.50000
+*                0.00000
+GRID*                  5               0         1.00000        -0.50000
+*                0.00000
+GRID*                  6               0         0.00000        -0.50000
+*                0.00000
+GRID*                  7               0        -1.00000        -1.50000
+*                0.00000
+GRID*                  8               0         1.00000        -1.50000
+*                0.00000
+GRID*                  9               0         0.00000        -1.50000
+*                0.00000
+$
+$ Element cards
+$
+$
+$ Name: MMB4_quad
+$
+CQUAD4  1       1       1       3       6       5       
+CQUAD4  2       1       3       2       4       6       
+$
+$ Name: MMB3_tri
+$
+CTRIA3  3       2       7       9       6       
+CTRIA3  4       2       9       8       5       
+CTRIA3  5       2       7       6       4       
+CTRIA3  6       2       9       5       6       
+$
+$ Name: MMT2_edge
+$
+CROD    7       3       1       3       
+CROD    8       3       3       2       
+CROD    9       3       2       4       
+CROD    10      3       5       1       
+CROD    11      3       4       7       
+CROD    12      3       7       9       
+CROD    13      3       9       8       
+CROD    14      3       8       5       
+$
+$ Property cards
+$
+$
+$ Name: MMB4_quad
+$
+MAT1     1      1       1       1       
+$
+$ Name: MMB3_tri
+$
+MAT1     2      1       1       1       
+$
+$ Name: MMT2_edge
+$
+MAT1     3      1       1       1       
+ENDDATA
