@@ -72,17 +72,16 @@ cubit_mesh_export.export_3D_vtk(cubit, FileName)
 ## 関数一覧
 
 ### Gmsh形式
-- `export_gmsh_ver2(cubit, filename)` - Gmsh v2.2形式で3Dメッシュをエクスポート
+- `export_gmsh_ver2(cubit, filename)` - Gmsh v2.2形式で3Dメッシュをエクスポート 2次要素に対応
 
 ### Nastran形式
-- `export_2D_Nastran(cubit, filename)` - 2DメッシュをNastran形式でエクスポート
-- `export_3D_Nastran(cubit, filename)` - 3DメッシュをNastran形式でエクスポート
+- `export_Nastran(cubit, filename, DIM="2D|3D", PYRAM=True|False)` - 2D/3DメッシュをNastran形式でエクスポート、PyramidをHexに変換、1次要素のみサポート
 
 ### MEG形式（ELF用）
-- `export_meg(cubit, filename)`
+- `export_meg(cubit, filename, DIM="T|R|K", MGR2)` - T:3次元、R:軸対称、K:2次元、MGR2で空間節点を指定
 
 ### VTK形式
-- `export_3D_vtk(cubit, filename)` - 3DメッシュをVTK形式でエクスポート
+- `export_3D_vtk(cubit, filename, ORDER="2nd")` - Legacy VTK形式でエクスポート、2ndで2次要素に対応
 
 ## 要件
 
@@ -108,20 +107,3 @@ Kengo Sugahara (ksugahar@gmail.com)
 
 [GitHub Issues](https://github.com/ksugahar/Coreform_Cubit_Mesh_Export/issues)にてお願いします。
 
-## 変更履歴
-
-### v0.9.4 (2025-09-11)
-- **バグ修正**
-  - Gmsh v4形式: Wedge要素のノード出力を4個から6個に修正
-  - Gmsh v4形式: 要素タグを0ではなく1から開始するよう修正
-  - Gmsh v4形式: 空の要素リストでmin/max関数がエラーになる問題を修正
-  - VTK形式: WedgeとPyramid要素のconnectivity取得処理が欠落していた問題を修正
-  - NASTRAN形式: f-string構文エラーを修正
-
-### v0.9.3 (2025-01)
-- パッケージ名を`Coreform_Cubit_Mesh_Export`に統一
-- `pyproject.toml`ベースの最新パッケージング方式に移行
-- ドキュメントの改善
-
-### v0.9.2
-- 初回PyPIリリース
