@@ -20,13 +20,6 @@ python.exe -m pip install --upgrade coreform-cubit-mesh-export
 pip install git+https://github.com/ksugahar/Coreform_Cubit_Mesh_Export.git
 ```
 
-### ローカルインストール（開発用）
-```bash
-git clone https://github.com/ksugahar/Coreform_Cubit_Mesh_Export.git
-cd Coreform_Cubit_Mesh_Export
-pip install -e .
-```
-
 ## サポートしているファイル形式
 
 - **Gmsh形式**
