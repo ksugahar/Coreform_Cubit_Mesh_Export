@@ -2,8 +2,8 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 $
 $                         CUBIT NX Nastran Translator
 $
-$            File: ./examples/quad8_tri6_bar3.bdf
-$      Time Stamp: 17-Oct-25 at 18:42:33
+$            File: examples/quad8_tri6_bar3.bdf
+$      Time Stamp: 18-Oct-25 at 19:41:30
 $
 $
 $                        PLEASE CHECK YOUR MODEL FOR UNITS CONSISTENCY.
@@ -50,23 +50,39 @@ $
 $ Node cards
 $
 GRID*                  1               0         1.00000         0.50000
-*                0.00000
+*       0
 GRID*                  2               0        -1.00000         0.50000
-*                0.00000
+*       0
 GRID*                  3               0         0.00000         0.50000
-*                0.00000
+*       0
 GRID*                  4               0        -1.00000        -0.50000
-*                0.00000
+*       0
 GRID*                  5               0         1.00000        -0.50000
-*                0.00000
+*       0
 GRID*                  6               0         0.00000        -0.50000
-*                0.00000
+*       0
 GRID*                  7               0        -1.00000        -1.50000
-*                0.00000
+*       0
 GRID*                  8               0         1.00000        -1.50000
-*                0.00000
+*       0
 GRID*                  9               0         0.00000        -1.50000
-*                0.00000
+*       0
+GRID*                 10               0         0.50000         0.50000
+*       0
+GRID*                 13               0         1.00000         0.00000
+*       0
+GRID*                 14               0        -0.50000         0.50000
+*       0
+GRID*                 15               0        -1.00000         0.00000
+*       0
+GRID*                 17               0        -0.50000        -1.50000
+*       0
+GRID*                 20               0         0.50000        -1.50000
+*       0
+GRID*                 21               0         1.00000        -1.00000
+*       0
+GRID*                 23               0        -1.00000        -1.00000
+*       0
 $
 $ Element cards
 $
@@ -94,18 +110,41 @@ CROD    12      3       7       9
 CROD    13      3       9       8       
 CROD    14      3       8       5       
 $
+$ Name: M..1_node
+$
+CMASS   15      4       1       
+CMASS   16      4       2       
+CMASS   17      4       10      
+CMASS   18      4       3       
+CMASS   19      4       14      
+CMASS   20      4       4       
+CMASS   21      4       15      
+CMASS   22      4       5       
+CMASS   23      4       13      
+CMASS   24      4       7       
+CMASS   25      4       23      
+CMASS   26      4       8       
+CMASS   27      4       17      
+CMASS   28      4       9       
+CMASS   29      4       20      
+CMASS   30      4       21      
+$
 $ Property cards
 $
 $
 $ Name: MMB4_quad
+PSHELL    1       1      
 $
-MAT1     1      1       1       1       
 $
 $ Name: MMB3_tri
+PSHELL    2       2      
 $
-MAT1     2      1       1       1       
 $
 $ Name: MMT2_edge
+PROD      3       3      
 $
-MAT1     3      1       1       1       
+$
+$ Name: M..1_node
+PMASS     4       4      
+$
 ENDDATA

@@ -8,7 +8,7 @@ cubit.init(['cubit','-nojournal','-batch'])
 if len(sys.argv) > 1:
 	FileName = sys.argv[1]
 else:
-	FileName = './examples/quad8_tri6_bar3'
+	FileName = 'examples/quad8_tri6_bar3'
 
 with open(FileName + '.jou','r', encoding='utf8') as fid:
 	strLines = fid.readlines()
@@ -25,7 +25,7 @@ import cubit_mesh_export
 
 cubit_mesh_export.export_Gmsh_ver2(cubit, FileName + '.msh')
 
-cubit_mesh_export.export_2D_Nastran(cubit, FileName + '.bdf')
+cubit_mesh_export.export_Nastran(cubit, FileName + '.bdf', DIM='2D')
 
 cubit_mesh_export.export_meg(cubit, FileName + '.meg', DIM='K', MGR2=[])
 

@@ -2,8 +2,8 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 $
 $                         CUBIT NX Nastran Translator
 $
-$            File: ./examples/hex20_pyramid13_tetra10_wedge15.bdf
-$      Time Stamp: 17-Oct-25 at 20:14:09
+$            File: examples/hex20_pyramid13_tetra10_wedge15.bdf
+$      Time Stamp: 18-Oct-25 at 19:45:30
 $
 $
 $                        PLEASE CHECK YOUR MODEL FOR UNITS CONSISTENCY.
@@ -49,7 +49,6 @@ $
 $
 $ Node cards
 $
-26
 GRID*                  1               0         0.50000        -0.50000
 *                1.00000
 GRID*                  2               0         0.50000         0.50000
@@ -102,6 +101,44 @@ GRID*                 25               0         0.50000        -2.50000
 *                1.00000
 GRID*                 26               0         0.50000        -2.50000
 *                0.00000
+GRID*                 27               0        -0.50000        -0.50000
+*                0.50000
+GRID*                 28               0        -0.50000         0.00000
+*                0.00000
+GRID*                 29               0        -0.50000         0.50000
+*                0.50000
+GRID*                 30               0        -0.50000         0.00000
+*                1.00000
+GRID*                 31               0         0.00000        -0.50000
+*                1.00000
+GRID*                 33               0         0.00000         0.50000
+*                0.00000
+GRID*                 34               0         0.00000         0.50000
+*                1.00000
+GRID*                 35               0         0.50000        -0.50000
+*                0.50000
+GRID*                 36               0         0.50000         0.00000
+*                0.00000
+GRID*                 37               0         0.50000         0.50000
+*                0.50000
+GRID*                 38               0         0.50000         0.00000
+*                1.00000
+GRID*                 39               0        -0.50000        -0.50000
+*               -0.50000
+GRID*                 40               0        -0.50000         0.00000
+*               -1.00000
+GRID*                 41               0        -0.50000         0.50000
+*               -0.50000
+GRID*                 42               0         0.00000        -0.50000
+*               -1.00000
+GRID*                 43               0         0.00000         0.50000
+*               -1.00000
+GRID*                 44               0         0.50000        -0.50000
+*               -0.50000
+GRID*                 45               0         0.50000         0.00000
+*               -1.00000
+GRID*                 46               0         0.50000         0.50000
+*               -0.50000
 $
 $ Element cards
 $
@@ -198,34 +235,72 @@ CROD    65      7       1       10
 CROD    66      7       10      6       
 CROD    67      7       10      12      
 $
+$ Name: M..1_edge
+$
+CMASS   68      8       38      
+CMASS   69      8       34      
+CMASS   70      8       30      
+CMASS   71      8       31      
+CMASS   72      8       1       
+CMASS   73      8       2       
+CMASS   74      8       3       
+CMASS   75      8       4       
+CMASS   76      8       45      
+CMASS   77      8       42      
+CMASS   78      8       40      
+CMASS   79      8       43      
+CMASS   80      8       5       
+CMASS   81      8       6       
+CMASS   82      8       7       
+CMASS   83      8       8       
+CMASS   84      8       29      
+CMASS   85      8       11      
+CMASS   86      8       41      
+CMASS   87      8       27      
+CMASS   88      8       9       
+CMASS   89      8       39      
+CMASS   90      8       28      
+CMASS   91      8       37      
+CMASS   92      8       12      
+CMASS   93      8       46      
+CMASS   94      8       33      
+CMASS   95      8       35      
+CMASS   96      8       10      
+CMASS   97      8       44      
+CMASS   98      8       36      
+$
 $ Property cards
 $
 $
 $ Name: MMB8_hex
+PSOLID    1       1      
 $
-MAT1     1      1       1       1       
 $
 $ Name: MMB8_pyramid
+PSOLID    2       2      
 $
-MAT1     2      1       1       1       
 $
 $ Name: MMB4_tetra
+PSOLID    3       3      
 $
-MAT1     3      1       1       1       
 $
 $ Name: MMB6_wedge
+PSOLID    4       4      
 $
-MAT1     4      1       1       1       
 $
 $ Name: MMT3_wedge
+PSHELL    5       5      
 $
-MAT1     5      1       1       1       
 $
 $ Name: MMT4_wedge
+PSHELL    6       6      
 $
-MAT1     6      1       1       1       
 $
 $ Name: MCL2_edge
+PROD      7       7      
 $
-MAT1     7      1       1       1       
+$
+$ Name: M..1_edge
+PMASS     8       8      
+$
 ENDDATA

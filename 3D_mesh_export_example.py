@@ -8,7 +8,7 @@ cubit.init(['cubit','-nojournal','-batch'])
 if len(sys.argv) > 1:
 	FileName = sys.argv[1]
 else:
-	FileName = './examples/hex20_pyramid13_tetra10_wedge15'
+	FileName = 'examples/hex20_pyramid13_tetra10_wedge15'
 
 with open(FileName + '.jou','r', encoding='utf8') as fid:
 	strLines = fid.readlines()
@@ -25,7 +25,7 @@ import cubit_mesh_export
 
 cubit_mesh_export.export_Gmsh_ver2(cubit, FileName + '.msh')
 
-cubit_mesh_export.export_3D_Nastran(cubit, FileName + '.bdf', PYRAM=False)
+cubit_mesh_export.export_Nastran(cubit, FileName + '.bdf', DIM='3D', PYRAM=False)
 
 cubit_mesh_export.export_meg(cubit, FileName + '.meg', DIM='T', MGR2=[])
 

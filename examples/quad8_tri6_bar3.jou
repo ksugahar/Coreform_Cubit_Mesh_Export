@@ -26,3 +26,6 @@ block 3 edge all in (curve with not is_merged in surface 1 2)
 block 3 name "MMT2_edge"
 block 3 element type bar3
 
+block 4 node all in (curve with not is_merged in surface 1 2)
+block 4 name "M..1_node"
+
