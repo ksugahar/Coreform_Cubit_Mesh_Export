@@ -1,0 +1,15 @@
+reset 
+
+create sphere radius 10
+volume all size auto factor 10
+volume all scheme tetmesh
+
+mesh vol all
+
+block 1 add tet all in vol 1
+block 1 name "MMB4_magnet"
+block 1 element type tetra10
+
+block 2 add tri all in (surface with not is_merged in volume 1)
+block 2 name "MMT3_wedge"
+block 2 element type tri6

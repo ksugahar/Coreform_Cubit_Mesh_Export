@@ -1,0 +1,14 @@
+reset 
+
+create sphere radius 10
+volume all size auto factor 5
+mesh vol all
+
+block 1 add hex all in vol 1
+block 1 name "MMB8_magnet"
+block 1 element type hex20
+
+block 2 add face all in (surface with not is_merged in volume 1)
+block 2 name "MMT4_wedge"
+block 2 element type quad8
+

@@ -8,6 +8,8 @@ cubit.init(['cubit','-nojournal','-batch'])
 if len(sys.argv) > 1:
 	FileName = sys.argv[1]
 else:
+	FileName = 'examples/example_2nd_order'
+	FileName = 'examples/example_2nd_order_tet'
 	FileName = 'examples/hex20_pyramid13_tetra10_wedge15'
 
 with open(FileName + '.jou','r', encoding='utf8') as fid:
