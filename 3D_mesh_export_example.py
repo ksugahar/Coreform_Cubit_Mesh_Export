@@ -21,6 +21,8 @@ with open(FileName + '.jou','r', encoding='utf8') as fid:
 #		print(edge_id)
 #cubit.cmd(f'save cub5 "O:/cubit.cub5" overwrite journal')
 
+#cubit.cmd('del block 1 to 3  5 to 8')
+
 import cubit_mesh_export
 
 cubit_mesh_export.export_Gmsh_ver2(cubit, FileName + '.msh')
@@ -29,5 +31,5 @@ cubit_mesh_export.export_Nastran(cubit, FileName + '.bdf', DIM='3D', PYRAM=False
 
 cubit_mesh_export.export_meg(cubit, FileName + '.meg', DIM='T', MGR2=[])
 
-cubit_mesh_export.export_vtk(cubit, FileName + '.vtk')
+cubit_mesh_export.export_vtk(cubit, FileName + '.vtk', ORDER="2nd")
 

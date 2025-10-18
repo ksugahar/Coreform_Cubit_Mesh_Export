@@ -416,7 +416,7 @@ def export_meg(cubit, FileName, DIM='T', MGR2=[]):
 ###	vtk format
 ########################################################################
 
-def export_vtk(cubit, FileName):
+def export_vtk(cubit, FileName, ORDER="2nd"):
 
 	fid = open(FileName,'w')
 	fid.write('# vtk DataFile Version 3.0\n')
@@ -449,66 +449,110 @@ def export_vtk(cubit, FileName):
 		edge_list.update(cubit.get_block_edges(block_id))
 		nodes_list.update(cubit.get_block_nodes(block_id))
 
-	fid.write(f'CELLS {len(tet_list) + len(hex_list) + len(wedge_list) + len(pyramid_list) + len(tri_list) + len(quad_list) + len(edge_list) + len(nodes_list)} {5*len(tet_list) + 9*len(hex_list) + 7*len(wedge_list) + 6*len(pyramid_list) + 4*len(tri_list) + 5*len(quad_list) + 3*len(edge_list) + 2*len(nodes_list)}\n' )
+	if ORDER=="2nd":
+		fid.write(f'CELLS {len(tet_list) + len(hex_list) + len(wedge_list) + len(pyramid_list) + len(tri_list) + len(quad_list) + len(edge_list) + len(nodes_list)} {11*len(tet_list) + 21*len(hex_list) + 16*len(wedge_list) + 14*len(pyramid_list) + 7*len(tri_list) + 9*len(quad_list) + 4*len(edge_list) + 2*len(nodes_list)}\n' )
+	else:
+		fid.write(f'CELLS {len(tet_list) + len(hex_list) + len(wedge_list) + len(pyramid_list) + len(tri_list) + len(quad_list) + len(edge_list) + len(nodes_list)} { 5*len(tet_list) +  9*len(hex_list) +  7*len(wedge_list) +  6*len(pyramid_list) + 4*len(tri_list) + 5*len(quad_list) + 3*len(edge_list) + 2*len(nodes_list)}\n' )
+
 	for tet_id in tet_list:
 		node_list = cubit.get_expanded_connectivity("tet", tet_id)
-		fid.write(f'4 {node_list[0]-1} {node_list[1]-1} {node_list[2]-1} {node_list[3]-1}\n')
+		if len(node_list)==4:
+			fid.write(f'4 {node_list[0]-1} {node_list[1]-1} {node_list[2]-1} {node_list[3]-1}\n')
+		if len(node_list)==10:
+			fid.write(f'10 {node_list[0]-1} {node_list[1]-1} {node_list[2]-1} {node_list[3]-1} {node_list[4]-1} {node_list[5]-1} {node_list[6]-1} {node_list[7]-1} {node_list[8]-1} {node_list[9]-1}\n')
 	for hex_id in hex_list:
 		node_list = cubit.get_expanded_connectivity("hex", hex_id)
-		fid.write(f'8 {node_list[0]-1} {node_list[1]-1} {node_list[2]-1} {node_list[3]-1} {node_list[4]-1} {node_list[5]-1} {node_list[6]-1} {node_list[7]-1}\n')
+		if len(node_list)==8:
+			fid.write(f'8 {node_list[0]-1} {node_list[1]-1} {node_list[2]-1} {node_list[3]-1} {node_list[4]-1} {node_list[5]-1} {node_list[6]-1} {node_list[7]-1}\n')
+		if len(node_list)==20:
+			fid.write(f'20 {node_list[0]-1} {node_list[1]-1} {node_list[2]-1} {node_list[3]-1} {node_list[4]-1} {node_list[5]-1} {node_list[6]-1} {node_list[7]-1} {node_list[8]-1} {node_list[9]-1} {node_list[10]-1} {node_list[11]-1} {node_list[16]-1} {node_list[17]-1} {node_list[18]-1} {node_list[19]-1} {node_list[12]-1} {node_list[13]-1} {node_list[14]-1} {node_list[15]-1}\n')
 	for wedge_id in wedge_list:
 		node_list = cubit.get_expanded_connectivity("wedge", wedge_id)
-		fid.write(f'6 {node_list[0]-1} {node_list[1]-1} {node_list[2]-1} {node_list[3]-1} {node_list[4]-1} {node_list[5]-1} \n')
+		if len(node_list)==6:
+			fid.write(f'6 {node_list[0]-1} {node_list[1]-1} {node_list[2]-1} {node_list[3]-1} {node_list[4]-1} {node_list[5]-1} \n')
+		if len(node_list)==15:
+			fid.write(f'15 {node_list[0]-1} {node_list[1]-1} {node_list[2]-1} {node_list[3]-1} {node_list[4]-1} {node_list[5]-1} {node_list[6]-1} {node_list[7]-1} {node_list[8]-1} {node_list[12]-1} {node_list[13]-1} {node_list[14]-1} {node_list[9]-1} {node_list[10]-1} {node_list[11]-1} \n')
+
 	for pyramid_id in pyramid_list:
 		node_list = cubit.get_expanded_connectivity("pyramid", pyramid_id)
-		fid.write(f'5 {node_list[0]-1} {node_list[1]-1} {node_list[2]-1} {node_list[3]-1} {node_list[4]-1} \n')
+		if len(node_list)==5:
+			fid.write(f'5 {node_list[0]-1} {node_list[1]-1} {node_list[2]-1} {node_list[3]-1} {node_list[4]-1} \n')
+		if len(node_list)==13:
+			fid.write(f'13 {node_list[0]-1} {node_list[1]-1} {node_list[2]-1} {node_list[3]-1} {node_list[4]-1} {node_list[5]-1} {node_list[6]-1} {node_list[7]-1} {node_list[8]-1} {node_list[9]-1} {node_list[10]-1} {node_list[11]-1} {node_list[12]-1} \n')
 	for tri_id in tri_list:
 		node_list = cubit.get_expanded_connectivity("tri", tri_id)
-		fid.write(f'3 {node_list[0]-1} {node_list[1]-1} {node_list[2]-1} \n')
+		if len(node_list)==3:
+			fid.write(f'3 {node_list[0]-1} {node_list[1]-1} {node_list[2]-1} \n')
+		if len(node_list)==6:
+			fid.write(f'6 {node_list[0]-1} {node_list[1]-1} {node_list[2]-1} {node_list[3]-1} {node_list[4]-1} {node_list[5]-1} \n')
 	for quad_id in quad_list:
 		node_list = cubit.get_expanded_connectivity("quad", quad_id)
-		fid.write(f'4 {node_list[0]-1} {node_list[1]-1} {node_list[2]-1} {node_list[3]-1} \n')
+		if len(node_list)==4:
+			fid.write(f'4 {node_list[0]-1} {node_list[1]-1} {node_list[2]-1} {node_list[3]-1} \n')
+		if len(node_list)==8:
+			fid.write(f'8 {node_list[0]-1} {node_list[1]-1} {node_list[2]-1} {node_list[3]-1} {node_list[4]-1} {node_list[5]-1} {node_list[6]-1} {node_list[7]-1}\n')
 	for edge_id in edge_list:
 		node_list = cubit.get_expanded_connectivity("edge", edge_id)
-		fid.write(f'2 {node_list[0]-1} {node_list[1]-1} \n')
+		if len(node_list)==2:
+			fid.write(f'2 {node_list[0]-1} {node_list[1]-1} \n')
+		if len(node_list)==3:
+			fid.write(f'3 {node_list[0]-1} {node_list[1]-1} {node_list[2]-1} \n')
 	for node_id in nodes_list:
 		fid.write(f'1 {node_id-1} \n')
 
 	fid.write(f'CELL_TYPES {len(tet_list) + len(hex_list) + len(wedge_list) + len(pyramid_list) + len(tri_list) + len(quad_list) + len(edge_list) + len(nodes_list)}\n')
-	for tet_id in tet_list:
-		fid.write('10\n')
-	for hex_id in hex_list:
-		fid.write('12\n')
-	for wedge_id in wedge_list:
-		fid.write('13\n')
-	for pyramid_id in pyramid_list:
-		fid.write('14\n')
-	for tri_id in tri_list:
-		fid.write('5\n')
-	for quad_id in quad_list:
-		fid.write('9\n')
-	for edge_id in edge_list:
-		fid.write('3\n')
-	for node_id in nodes_list:
-		fid.write('1\n')
+	if ORDER=="2nd":
+		for tet_id in tet_list:
+			fid.write('24\n')
+		for hex_id in hex_list:
+			fid.write('25\n')
+		for wedge_id in wedge_list:
+			fid.write('26\n')
+		for pyramid_id in pyramid_list:
+			fid.write('27\n')
+		for tri_id in tri_list:
+			fid.write('22\n')
+		for quad_id in quad_list:
+			fid.write('23\n')
+		for edge_id in edge_list:
+			fid.write('21\n')
+		for node_id in nodes_list:
+			fid.write('1\n')
+	else:
+		for tet_id in tet_list:
+			fid.write('10\n')
+		for hex_id in hex_list:
+			fid.write('12\n')
+		for wedge_id in wedge_list:
+			fid.write('13\n')
+		for pyramid_id in pyramid_list:
+			fid.write('14\n')
+		for tri_id in tri_list:
+			fid.write('5\n')
+		for quad_id in quad_list:
+			fid.write('9\n')
+		for edge_id in edge_list:
+			fid.write('3\n')
+		for node_id in nodes_list:
+			fid.write('1\n')
 	fid.write(f'CELL_DATA {len(tet_list) + len(hex_list) + len(wedge_list) + len(pyramid_list) + len(tri_list) + len(quad_list) + len(edge_list) + len(nodes_list)}\n')
 	fid.write('SCALARS scalars float\n')
 	fid.write('LOOKUP_TABLE default\n')
 	for tet_id in tet_list:
-		fid.write(f'{4}\n')
+		fid.write('1\n')
 	for hex_id in hex_list:
-		fid.write(f'{8}\n')
+		fid.write('2\n')
 	for wedge_id in wedge_list:
-		fid.write(f'{6}\n')
+		fid.write('3\n')
 	for pyramid_id in pyramid_list:
-		fid.write(f'{5}\n')
+		fid.write('4\n')
 	for tri_id in tri_list:
-		fid.write(f'{3}\n')
+		fid.write('5\n')
 	for quad_id in quad_list:
-		fid.write(f'{4}\n')
+		fid.write('6\n')
 	for edge_id in edge_list:
-		fid.write(f'{2}\n')
+		fid.write('0\n')
 	for node_id in nodes_list:
-		fid.write(f'{1}\n')
+		fid.write('-1\n')
 	return cubit
 
